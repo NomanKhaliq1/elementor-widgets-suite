@@ -1,0 +1,12 @@
+{
+  "title": "Elementor Widgets Suite",
+  "description": "Suite of Elementor widgets with dashboard toggles; includes a download card widget with auto file type detection, size display, and fully styleable button/icon.",
+  "techTags": ["PHP", "WordPress/Plugin", "Elementor", "CSS", "Admin UI"],
+  "source": "github",
+  "category": "PHP",
+  "live_url": "",
+  "repo_name": "elementor-widgets-suite",
+  "repo_link": true,
+  "image": "/projects/elementor-widgets-suite.webp",
+  "fetch": true
+}

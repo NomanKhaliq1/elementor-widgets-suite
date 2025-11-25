@@ -1,0 +1,308 @@
+.dcw-admin {
+    max-width: 100%;
+    /* Use full width available */
+    margin: 20px 0;
+    /* Remove auto margin to fix left gap */
+    padding-right: 20px;
+    /* Add some right padding */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.dcw-admin h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.dcw-admin p.dcw-lead {
+    color: #6b7280;
+    margin-top: 0;
+    margin-bottom: 32px;
+    font-size: 16px;
+    max-width: 600px;
+}
+
+.dcw-admin .dcw-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.dcw-admin .dcw-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease;
+    position: relative;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.dcw-admin .dcw-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: #d1d5db;
+}
+
+.dcw-admin .dcw-thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    background: #f9fafb;
+    padding: 16px;
+    height: 160px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.dcw-admin .dcw-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.dcw-admin .dcw-thumb .dcw-noimg {
+    color: #9ca3af;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dcw-admin .dcw-row {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.dcw-admin .dcw-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #111827;
+}
+
+.dcw-admin .dcw-desc {
+    margin: 0 0 16px 0;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.dcw-admin .dcw-actions-inline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #f3f4f6;
+}
+
+.dcw-admin .dcw-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dcw-admin .dcw-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.dcw-admin .dcw-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.dcw-admin .dcw-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e5e7eb;
+    transition: 0.3s;
+    border-radius: 999px;
+}
+
+.dcw-admin .dcw-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dcw-admin .dcw-switch input:checked+.dcw-slider {
+    background-color: #0f766e;
+}
+
+.dcw-admin .dcw-switch input:checked+.dcw-slider:before {
+    transform: translateX(20px);
+}
+
+.dcw-admin .dcw-meta-buttons {
+    /* Moved into inline actions for better layout */
+    display: none;
+}
+
+/* Re-implement ghost button inside actions-inline via JS or PHP structure change if needed, 
+   but for now let's style the existing button if it's there */
+.dcw-admin .dcw-ghost-btn {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #374151;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dcw-admin .dcw-ghost-btn:hover {
+    border-color: #0f766e;
+    color: #0f766e;
+    background: #f0fdfa;
+}
+
+.dcw-admin .dcw-actions {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dcw-admin .button-primary {
+    background: #0f766e !important;
+    border-color: #0f766e !important;
+    padding: 6px 20px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.dcw-admin .button-primary:hover {
+    background: #0d9488 !important;
+    border-color: #0d9488 !important;
+    transform: translateY(-1px);
+}
+
+/* Modal */
+.dcw-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+}
+
+.dcw-modal {
+    background: #ffffff;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    padding: 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    animation: dcwModalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dcwModalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.dcw-modal h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 20px 0;
+}
+
+.dcw-modal #dcw-modal-img {
+    background: #f3f4f6;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.dcw-modal img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.dcw-modal .dcw-modal-desc {
+    color: #4b5563;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.dcw-modal .dcw-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #6b7280;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.dcw-modal .dcw-modal-close:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
