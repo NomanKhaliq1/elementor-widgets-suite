@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 /**
  * Plugin Name: Elementor Widgets Suite
- * Description: A growing set of Elementor widgets (starting with Download Card) with enable/disable controls from the dashboard.
+ * Description: A growing set of Elementor widgets (Download Card, Video Card) with enable/disable controls from the dashboard.
  * Version:     1.0.0
  * Author:      Noman Khaliq
  * Author URI:  https://www.nomankhaliq.dev/
@@ -23,9 +23,12 @@ function ews_get_enabled_widgets() {
         $saved = [];
     }
 
-    // Default: our current widget is enabled.
+    // Defaults: widgets enabled.
     if (!array_key_exists('download_card_widget', $saved)) {
         $saved['download_card_widget'] = 1;
+    }
+    if (!array_key_exists('video_card_widget', $saved)) {
+        $saved['video_card_widget'] = 1;
     }
 
     return $saved;
@@ -43,11 +46,11 @@ function ews_save_enabled_widgets($data) {
 }
 
 // Admin menu to toggle widgets.
-    add_action('admin_menu', function () {
-        $hook = add_menu_page(
-            __('Elementor Widgets Suite', 'download-card-widget'),
-            __('Elementor Widgets', 'download-card-widget'),
-            'manage_options',
+add_action('admin_menu', function () {
+    $hook = add_menu_page(
+        __('Elementor Widgets Suite', 'download-card-widget'),
+        __('Elementor Widgets', 'download-card-widget'),
+        'manage_options',
         'elementor-widgets-suite',
         'ews_render_admin_page',
         'dashicons-admin-plugins',
@@ -90,6 +93,11 @@ function ews_render_admin_page() {
             'label' => __('Download Card Widget', 'download-card-widget'),
             'img'   => plugins_url('assets/widget-previews/download-card-widget.png', __FILE__),
             'desc'  => __('Displays a file download card with title, description, auto file type detection, size, and customizable button/icon.', 'download-card-widget'),
+        ],
+        'video_card_widget' => [
+            'label' => __('Video Card Widget', 'download-card-widget'),
+            'img'   => plugins_url('assets/widget-previews/video-card-widget.png', __FILE__),
+            'desc'  => __('Video CTA card with icon, tag, duration, title, and Watch button that can open a popup or YouTube tab.', 'download-card-widget'),
         ],
     ];
 
@@ -169,27 +177,51 @@ function ews_render_admin_page() {
     <?php
 }
 
-// Register widget (and its CSS)
+// Register widgets (and their CSS/JS).
 add_action('plugins_loaded', function () {
     $enabled = ews_get_enabled_widgets();
-    if (empty($enabled['download_card_widget'])) {
+
+    if (!did_action('elementor/loaded')) {
         return;
     }
 
-    if (did_action('elementor/loaded')) {
-        add_action('elementor/widgets/register', function ($widgets_manager) {
+    add_action('elementor/widgets/register', function ($widgets_manager) use ($enabled) {
+        if (!empty($enabled['download_card_widget'])) {
             require_once __DIR__ . '/includes/widgets/class-download-card-widget.php';
             $widgets_manager->register(new \Download_Card_Widget());
-        });
+        }
 
-        // Ensure CSS is registered for Elementor to enqueue per widget.
-        add_action('wp_enqueue_scripts', function () {
+        if (!empty($enabled['video_card_widget'])) {
+            require_once __DIR__ . '/includes/widgets/class-video-card-widget.php';
+            $widgets_manager->register(new \Video_Card_Widget());
+        }
+    });
+
+    // Register asset handles for enabled widgets; Elementor will enqueue per widget.
+    add_action('wp_enqueue_scripts', function () use ($enabled) {
+        if (!empty($enabled['download_card_widget'])) {
             wp_register_style(
                 'download-card-widget',
                 plugins_url('includes/widgets/download-card-widget.css', __FILE__),
                 [],
                 '1.0.3'
             );
-        });
-    }
+        }
+
+        if (!empty($enabled['video_card_widget'])) {
+            wp_register_style(
+                'video-card-widget',
+                plugins_url('includes/widgets/video-card-widget.css', __FILE__),
+                [],
+                '1.0.0'
+            );
+            wp_register_script(
+                'video-card-widget',
+                plugins_url('includes/widgets/video-card-widget.js', __FILE__),
+                ['jquery'],
+                '1.0.0',
+                true
+            );
+        }
+    });
 });
