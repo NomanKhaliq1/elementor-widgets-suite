@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     function toEmbed(url) {
         if (!url) return '';
         var yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/i);

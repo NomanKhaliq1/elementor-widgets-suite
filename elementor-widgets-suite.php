@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Plugin Name: Elementor Widgets Suite
  * Description: A growing set of Elementor widgets (Download Card, Video Card) with enable/disable controls from the dashboard.
